@@ -33,7 +33,7 @@ You will need to build a RESTful API to support the followingfunctionality:
 - Gunicorn
 
 ### Running Applcation (1st way via docker-compose)[*recommended*]
-0. Clone repo `git clone verto-adams`
+0. Clone repo `git clone https://github.com/adams-liu/verto-adams.git`
 1. Install docker engine and docker-compose
 2. Go into the repo where the project exist, you should see client, deployment, server directories, as well as the docker files.
 3. Run `docker-compose up` in your terminal to start the server and client containers, this will take a few minutes. `CTRL + C` to stop the containers.
@@ -42,7 +42,7 @@ You will need to build a RESTful API to support the followingfunctionality:
 
 
 ### Running Applcation (2nd via locally)
-0. Clone repo `git clone verto-adams`
+0. Clone repo `git clone https://github.com/adams-liu/verto-adams.git`
 1. Open up 2 terminals and `cd` into the `server` and `client`
 2. For the server, create a virtual environment `python3 -m venv env`
 3. Activate it `source env/bin/activate`
