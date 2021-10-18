@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import {EmployeeProvider} from "./context/EmployeeContext";
+
+import { UserProvider } from "./context/UserContext";
 
 ReactDOM.render(
-  <EmployeeProvider>
+  <UserProvider>
     <App />
-  </EmployeeProvider>,
+  </UserProvider>,
   document.getElementById("root")
 );

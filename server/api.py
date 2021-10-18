@@ -1,6 +1,6 @@
-import time
-from flask import Flask, Blueprint, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint, request
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 from model import Employee 
 from database import db
 import re
@@ -19,10 +19,12 @@ def index():
 
 
 @api_handler.route('/api/employee', methods = ["POST","GET"])
+@jwt_required()
 def employees():
     '''REST API functions related to creating and retrieving employees'''
 
     if request.method == 'GET':
+        
         ## obtain query parameters
         fname = request.args.get('fname').upper() if request.args.get('fname') else ''
         lname = request.args.get('lname').upper() if request.args.get('lname') else ''
@@ -49,7 +51,6 @@ def employees():
 
         ## return serialized json output
         return {"count":len(result),"employees":[employee.serialize for employee in result]}, 200
-
 
 
     if request.method == 'POST':
@@ -103,11 +104,12 @@ def employees():
 
 
 
+
 @api_handler.route('/api/employee/<employee_num>', methods = ["GET","PUT","DELETE"])
+@jwt_required()
 def oneEmployee(employee_num):
     '''REST API functions related to single employee'''
     employee = Employee.query.filter_by(employee_num=employee_num).first()
-    
     if request.method == 'GET':
         if employee:
             return employee.serialize, 200
@@ -167,10 +169,8 @@ def oneEmployee(employee_num):
             db.session.commit()
 
             return {"employee":employee.serialize}, 200
+                
 
-
-
-            
             
                   
         

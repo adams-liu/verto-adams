@@ -1,24 +1,30 @@
-import React, { useContext } from 'react';
-import PatientTable from './components/PatientTable'
-import EmployeeModal from './components/EmployeeModal'
-import SearchBar from './components/SearchBar';
-import { EmployeeContext } from './context/EmployeeContext';
-import './App.css';
+import React, {useState,useContext} from "react";
+import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/MainPage";
+import ProtectedRoute from "./ProtectedRoute";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {EmployeeProvider} from "./context/EmployeeContext";
+import { UserContext } from "./context/UserContext";
+
+import "./App.css";
 
 function App() {
-  const data = useContext(EmployeeContext).data
+  const user = useContext(UserContext)
+  console.log(user.isAuth)
+
+
   return (
-    <div className="App">
-      <h1>Patient List</h1>
-      <div className="searchBar">
-        <div><SearchBar/></div>
-        
-        <div style={{display:"flex", justifyContent:"center"}}><EmployeeModal/></div>
-        
-        
+    <Router>
+      <div className="App">
+        <Switch>
+        <Route exact path="/login" component={LoginPage} />
+        <EmployeeProvider>
+          <ProtectedRoute path="/" component={MainPage} isAuth={user.isAuth}/>
+          </EmployeeProvider>
+         
+        </Switch>
       </div>
-      <PatientTable data={data}/>
-    </div>
+    </Router>
   );
 }
 

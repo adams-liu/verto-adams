@@ -1,6 +1,6 @@
-let baseUrl = "http://localhost:3000/api/employee"
-//let baseUrl = "http://localhost:5000/api/employee"
+import {serverUrl} from './env'
 
+let baseUrl = `${serverUrl}/api/employee`
 
 export const getEmployees = (department, search, searchVal) =>{
     let url = `${baseUrl}?`
@@ -11,10 +11,17 @@ export const getEmployees = (department, search, searchVal) =>{
     if (search !== null && search !== ""){
         url += `&${search}=`+ searchVal;
     }
+
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${sessionStorage.getItem("access_token")}`);
+
     return new Promise((resolve,reject)=>{
-        fetch(url)
+        fetch(url,{
+            headers: myHeaders
+        })
         .then(response => response.json())
         .then(result =>{
+            console.log(result)
             resolve(result)
         })
         .catch(error =>{

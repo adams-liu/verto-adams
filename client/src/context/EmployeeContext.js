@@ -1,4 +1,4 @@
-//Create a UserContext.js file
+//Create a EmployeeContext.js file
 
 import React, { createContext, useState } from "react";
 export const EmployeeContext = createContext();

@@ -11,7 +11,7 @@ function PatientTable({data}) {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Department</th>
-            <th> </th>
+            <th></th>
           </tr>
           </thead>
          
